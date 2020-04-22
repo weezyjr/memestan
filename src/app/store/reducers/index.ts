@@ -1,6 +1,8 @@
-import { ActionReducerMap, MetaReducer, createSelector, createFeatureSelector } from '@ngrx/store';
+import { ActionReducerMap, MetaReducer, } from '@ngrx/store';
+import { RouterReducerState, routerReducer } from '@ngrx/router-store';
 import { environment } from '../../../environments/environment';
-import * as fromSettingStore from './settings.reducer';
+import * as fromSetting from './settings.reducer';
+import * as fromRouter from './router.reducer';
 
 /**
  * storeFreeze prevents state from being mutated. When mutation occurs, an
@@ -14,7 +16,8 @@ import { storeFreeze } from 'ngrx-store-freeze';
  * our top level state interface is just a map of keys to inner state types.
  */
 export interface State {
-  settingFeature: fromSettingStore.State;
+  settings: fromSetting.State;
+  router: RouterReducerState<fromRouter.RouterStateUrl>;
 }
 
 /**
@@ -23,7 +26,8 @@ export interface State {
  * and the current or initial state and return a new immutable state.
  */
 export const reducers: ActionReducerMap<State> = {
-  settingFeature: fromSettingStore.reducers,
+  settings: fromSetting.reducers,
+  router: routerReducer,
 };
 
 /**

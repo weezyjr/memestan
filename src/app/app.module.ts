@@ -8,7 +8,10 @@ import { reducers, metaReducers } from './store/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import {
+  StoreRouterConnectingModule,
+  RouterStateSerializer,
+} from '@ngrx/router-store';
 import { SettingsEffects } from './store/effects';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -19,9 +22,11 @@ import {
   TranslatePipe,
 } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { CustomSerializer } from './store/reducers/router.reducer';
+import { AppSettingsComponent } from './app-settings/app-settings.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, AppSettingsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -33,7 +38,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
       logOnly: environment.production,
     }),
     EffectsModule.forRoot([SettingsEffects]),
-    StoreRouterConnectingModule.forRoot(),
+    StoreRouterConnectingModule.forRoot({
+      serializer: CustomSerializer
+    }),
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -46,7 +53,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
       },
     }),
   ],
-  providers: [TranslatePipe],
+  providers: [
+    TranslatePipe,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

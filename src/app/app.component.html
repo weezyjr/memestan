@@ -1,10 +1,1 @@
-<main [ngClass]="{'rtl': (lang$ | async)}">
-  <div class="container">
-    <div class="m-2">
-      <h1>{{'Hello' | translate}}</h1>
-      <button class="btn btn-secondary" (click)="changeTheme()"> <i class="theme-switch-icon "></i> </button>
-      <button class="btn btn-secondary" (click)="changeLang()"> <i>ع</i> </button>
-    </div>
-    <router-outlet></router-outlet>
-  </div>
-</main>
+<router-outlet></router-outlet>
