@@ -70,3 +70,13 @@ body {
 .btn:focus {
   box-shadow: none !important;
 }
+
+.btn-secondary {
+  background-color: var(--button-background);
+  color: var(--button-color);
+}
+
+.rtl {
+  direction: rtl;
+  text-align: right;
+}
