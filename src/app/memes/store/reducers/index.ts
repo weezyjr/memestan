@@ -3,7 +3,7 @@ import { EntityState, createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 import { ActionReducer, createReducer, Action, on } from '@ngrx/store';
 import * as MemesActions from '../actions';
 
-export interface State extends EntityState<Meme> {
+export interface MemeState extends EntityState<Meme> {
   currentMeme: Meme;
   loading: boolean;
   loaded: boolean;
@@ -25,7 +25,7 @@ const initialState = memeAdapter.getInitialState({
   error: null,
 });
 
-const featureReducer: ActionReducer<State, Action> = createReducer(
+const featureReducer: ActionReducer<MemeState, Action> = createReducer(
   initialState,
   on(MemesActions.getAllMemes, (state) => ({ ...state })),
   on(MemesActions.getAllMemesSuccess, (state, { payload }) =>
@@ -34,6 +34,6 @@ const featureReducer: ActionReducer<State, Action> = createReducer(
   on(MemesActions.getAllMemesFail, (state, error) => ({ ...state, error }))
 );
 
-export function reducers(state: State, action: Action) {
+export function memesReducers(state: MemeState, action: Action) {
   return featureReducer(state, action);
 }

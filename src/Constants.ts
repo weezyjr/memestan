@@ -7,3 +7,6 @@ export const LANG_CODE = {
   0: 'en',
   1: 'ar',
 };
+export const STORE_FEATURES = {
+  memes: 'memes',
+};

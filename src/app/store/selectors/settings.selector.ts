@@ -7,10 +7,10 @@ export const selectSettingsFeature = (state: fromStore.State) =>
 
 export const getLang = createSelector(
   selectSettingsFeature,
-  (state: fromSetting.State) => state.arabicLanguage
+  (state: fromSetting.SettingsState) => state.arabicLanguage
 );
 
 export const getTheme = createSelector(
   selectSettingsFeature,
-  (state: fromSetting.State) => state.darkTheme
+  (state: fromSetting.SettingsState) => state.darkTheme
 );

@@ -8,6 +8,6 @@ import { Store, select } from '@ngrx/store';
 })
 export class MemesContainerComponent implements OnInit {
   public memes$ = this.store.pipe(select(fromMemes.selectAll));
-  constructor(private store: Store<fromMemes.State>) {}
+  constructor(private store: Store<fromMemes.MemeState>) {}
   ngOnInit() {}
 }

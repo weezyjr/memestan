@@ -1,11 +1,12 @@
-import { memeAdapter, State } from '../reducers';
+import { memeAdapter, MemeState } from '../reducers';
 import { createFeatureSelector } from '@ngrx/store';
+import { STORE_FEATURES } from 'src/Constants';
 
-export const selectMemes = createFeatureSelector<State>('memes');
+const selectMemes = createFeatureSelector<MemeState>(STORE_FEATURES.memes);
 
 export const {
   selectIds,
   selectEntities,
   selectAll,
   selectTotal,
-} = memeAdapter.getSelectors<State>((state: State) => selectMemes(state));
+} = memeAdapter.getSelectors<MemeState>((state: MemeState) => selectMemes(state));

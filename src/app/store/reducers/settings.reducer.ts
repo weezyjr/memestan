@@ -1,17 +1,17 @@
 import { createReducer, on, Action, ActionReducer } from '@ngrx/store';
 import * as actions from '../actions';
 
-export interface State {
+export interface SettingsState {
   arabicLanguage: boolean;
   darkTheme: boolean;
 }
 
-export const initialState: State = {
+const initialState: SettingsState = {
   arabicLanguage: false,
   darkTheme: false,
 };
 
-export const featureReducer: ActionReducer<State, Action> = createReducer(
+const featureReducer: ActionReducer<SettingsState, Action> = createReducer(
   initialState,
   on(actions.changeLang, (state) => ({
     ...state,
@@ -23,6 +23,6 @@ export const featureReducer: ActionReducer<State, Action> = createReducer(
   }))
 );
 
-export function reducers(state: State, action: Action) {
+export function settingsReducers(state: SettingsState, action: Action) {
   return featureReducer(state, action);
 }
