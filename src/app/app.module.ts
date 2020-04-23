@@ -23,7 +23,8 @@ import {
 } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CustomSerializer } from './store/reducers/router.reducer';
-import { AppSettingsComponent } from './app-settings/app-settings.component';
+import { AppSettingsComponent } from './components/app-settings/app-settings.component';
+import { MemesModule } from './memes/memes.module';
 
 @NgModule({
   declarations: [AppComponent, AppSettingsComponent],
@@ -52,6 +53,7 @@ import { AppSettingsComponent } from './app-settings/app-settings.component';
         deps: [HttpClient],
       },
     }),
+    MemesModule,
   ],
   providers: [
     TranslatePipe,

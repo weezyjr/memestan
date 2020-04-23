@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, Effect, ofType, createEffect } from '@ngrx/effects';
 import { tap, switchMap, withLatestFrom } from 'rxjs/operators';
 import * as fromStore from '../index';
 import { Store } from '@ngrx/store';
@@ -10,31 +10,37 @@ import { LocalStorageHelper } from 'src/app/helpers/localStorage.helper';
 
 @Injectable()
 export class SettingsEffects {
-  @Effect({ dispatch: false })
-  changeTheme$ = this.actions$.pipe(
-    ofType(fromStore.changeTheme),
-    switchMap((action) =>
-      of(action).pipe(withLatestFrom(this.store.select(fromStore.getTheme)))
-    ),
-    tap(([action, theme]) => {
-      document.documentElement.setAttribute(
-        THEME_DATA_ATTR,
-        THEME_CODE[+theme]
-      );
-      LocalStorageHelper.setTheme(theme);
-    })
+  changeTheme$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(fromStore.changeTheme),
+        switchMap((action) =>
+          of(action).pipe(withLatestFrom(this.store.select(fromStore.getTheme)))
+        ),
+        tap(([action, theme]) => {
+          document.documentElement.setAttribute(
+            THEME_DATA_ATTR,
+            THEME_CODE[+theme]
+          );
+          LocalStorageHelper.setTheme(theme);
+        })
+      ),
+    { dispatch: false }
   );
 
-  @Effect({ dispatch: false })
-  changeLang$ = this.actions$.pipe(
-    ofType(fromStore.changeLang),
-    switchMap((action) =>
-      of(action).pipe(withLatestFrom(this.store.select(fromStore.getLang)))
-    ),
-    tap(([action, lang]) => {
-      this.translateService.use(LANG_CODE[+lang]);
-      LocalStorageHelper.setLang(lang);
-    })
+  changeLang$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(fromStore.changeLang),
+        switchMap((action) =>
+          of(action).pipe(withLatestFrom(this.store.select(fromStore.getLang)))
+        ),
+        tap(([action, lang]) => {
+          this.translateService.use(LANG_CODE[+lang]);
+          LocalStorageHelper.setLang(lang);
+        })
+      ),
+    { dispatch: false }
   );
 
   constructor(

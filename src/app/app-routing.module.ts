@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SettingsGuard } from './guards/settings.guard';
-import { AppSettingsComponent } from './app-settings/app-settings.component';
+import { AppSettingsComponent } from './components/app-settings/app-settings.component';
 
 const routes: Routes = [
   {
